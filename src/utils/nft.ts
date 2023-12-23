@@ -12,9 +12,9 @@ export const fetchNft = async (umi: Umi, nftAdress: PublicKey) => {
   try {
     digitalAsset = await fetchDigitalAsset(umi, nftAdress)
     jsonMetadata = await fetchJsonMetadata(umi, digitalAsset.metadata.uri)
-  } catch (error) {
-    console.error(error)
-    console.warn('Could not fetch NFT')
+  } catch (e) {
+    console.error(e)
+    console.log('Could not fetch NFT')
   }
 
   return { digitalAsset, jsonMetadata }

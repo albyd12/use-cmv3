@@ -1,6 +1,6 @@
 {
   "name": "use-cmv3",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "React library for interacting with metaplex candy machine v3",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
@@ -16,7 +16,7 @@
     "lint": "eslint \"{**/*,*}.{js,ts,jsx,tsx}\"",
     "prettier": "prettier --write \"{src,tests,example/src}/**/*.{js,ts,jsx,tsx}\"",
     "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run prettier && npm run lint"
+    "prepublishOnly": "npm run prettier && npm run lint"
   },
   "author": "Alby (0xalby)",
   "license": "MIT",

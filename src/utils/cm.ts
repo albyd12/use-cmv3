@@ -15,8 +15,8 @@ export const validateCandyMachine = async (
   try {
     candyMachine = await fetchCandyMachine(umi, publicKey(candyMachineId))
   } catch (error) {
-    console.error(error)
-    console.warn('No candy machine found')
+    console.log(error)
+    console.log('No candy machine found')
   }
 
   if (!candyMachine) return null
@@ -26,8 +26,8 @@ export const validateCandyMachine = async (
   try {
     candyGuard = await safeFetchCandyGuard(umi, candyMachine.mintAuthority)
   } catch (error) {
-    console.error(error)
-    console.warn('No candy guard found')
+    console.log(error)
+    console.log('No candy guard found')
   }
 
   if (!candyGuard) return null

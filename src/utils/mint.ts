@@ -148,33 +148,31 @@ export const combineTransactions = async (
   txs: TransactionBuilder[],
   lut?: string,
 ): Promise<TransactionBuilder[]> => {
-  if (lut) {
-    const lutPubKey = publicKey(lut)
-    const fetchedLut = await fetchAddressLookupTable(umi, lutPubKey)
-    const tables: AddressLookupTableInput[] = [fetchedLut]
-
-    txs.forEach((tx) => {
-      tx.setAddressLookupTables(tables)
-    })
-  } else {
-    console.warn('It is highly reccomended that you use an LUT')
-  }
-
   const returnArray: TransactionBuilder[] = []
-  let builder = new TransactionBuilder()
-
-  for (const tx of txs) {
-    const fitsInTransaction = builder.fitsInOneTransaction(umi)
-
-    if (!fitsInTransaction) {
-      returnArray.push(builder)
-      builder = new TransactionBuilder()
+  let builder = transactionBuilder()
+  // combine as many transactions as possible into one
+  for (let i = 0; i <= txs.length - 1; i++) {
+    const tx = txs[i]
+    let oldBuilder = builder
+    builder = builder.add(tx)
+    let tables: AddressLookupTableInput[] = []
+    if (lut) {
+      const lutPubKey = publicKey(lut)
+      const fetchedLut = await fetchAddressLookupTable(umi, lutPubKey)
+      tables = [fetchedLut]
+      builder = builder.setAddressLookupTables(tables)
+    } else {
+      console.log('You should setup an LUT')
     }
-
-    builder.add(tx)
+    if (!builder.fitsInOneTransaction(umi)) {
+      oldBuilder = oldBuilder.setAddressLookupTables(tables)
+      returnArray.push(oldBuilder)
+      builder = new TransactionBuilder()
+      builder = builder.add(tx)
+    }
+    if (i === txs.length - 1) {
+      returnArray.push(builder)
+    }
   }
-
-  returnArray.push(builder)
-
   return returnArray
 }

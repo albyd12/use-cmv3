@@ -26,17 +26,20 @@ export const getMintPhases = async (
   candyGuard: CandyGuard,
   allowLists?: AllowLists,
 ): Promise<Phase[]> => {
+  //creates a map of all phases (guards) releative to the current user
+
   console.log('Fetching phases for wallet:', umi.identity.publicKey.toString())
 
   const relativePhases = await Promise.all(
     candyGuard.groups.map(async (group) => {
+      const solBalance = await umi.rpc.getBalance(umi.identity.publicKey)
+
       const errors: string[] = []
+
       const payments: Payment[] = []
 
       let endDate: number | undefined = undefined
       let startDate: number | undefined = undefined
-
-      const solBalance = await umi.rpc.getBalance(umi.identity.publicKey)
 
       //address based guards
       if (group.guards.allowList.__option == 'Some') {
