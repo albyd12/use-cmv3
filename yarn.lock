@@ -830,27 +830,39 @@
     semver "^7.3.8"
     superstruct "^1.0.3"
 
-"@metaplex-foundation/mpl-candy-machine@6.0.0-alpha.16":
-  version "6.0.0-alpha.16"
-  resolved "https://registry.npmjs.org/@metaplex-foundation/mpl-candy-machine/-/mpl-candy-machine-6.0.0-alpha.16.tgz"
-  integrity sha512-F5b1v5vQi5EmfMqHPc/vfFo4/L4n94Chtyzy3SZA/mplGZnqSBEW+tvxu5d0BKbymWdURocRe32cVLC192hQLQ==
+"@metaplex-foundation/mpl-candy-machine@^6.0.0-alpha.16":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@metaplex-foundation/mpl-candy-machine/-/mpl-candy-machine-6.0.0.tgz#9ad6dc1303f25081193efe984c9d4092c2e93eec"
+  integrity sha512-NOBTAAgQI3w//thrC8KBi31xr2mFbBKErFF3HipsZBA0kNXEjmXDjQ1npkVwsNSPhUDhmBYpZ1MHv8Fgq++RqA==
   dependencies:
-    "@metaplex-foundation/mpl-token-metadata" "3.0.0-alpha.24"
-    "@metaplex-foundation/mpl-toolbox" "^0.8.0"
+    "@metaplex-foundation/mpl-token-metadata" "3.0.0-alpha.27"
+    "@metaplex-foundation/mpl-toolbox" "^0.9.0"
     "@noble/hashes" "^1.2.0"
     merkletreejs "^0.3.9"
 
-"@metaplex-foundation/mpl-token-metadata@3.0.0-alpha.24":
-  version "3.0.0-alpha.24"
-  resolved "https://registry.npmjs.org/@metaplex-foundation/mpl-token-metadata/-/mpl-token-metadata-3.0.0-alpha.24.tgz"
-  integrity sha512-1idZ+9yKGq58OaRQuAjJwPxtgEp62x2iWerMB0b5SRHvHHZc+vvjPX0jjPaiX2MjG1dq18Xua6FpSsIay3+Gjg==
+"@metaplex-foundation/mpl-token-metadata@3.0.0-alpha.27":
+  version "3.0.0-alpha.27"
+  resolved "https://registry.yarnpkg.com/@metaplex-foundation/mpl-token-metadata/-/mpl-token-metadata-3.0.0-alpha.27.tgz#7fa5e8432dcb1744be1cb3bd82fb462061ab589d"
+  integrity sha512-MSERz5HB2XZ/K+FOMh0tPeqcZZEpGVzdy7e+Cy3MHg7x52JtbGBDtWIoxBJn1OBZayCBfX9gytEoqrXe2YRGqQ==
   dependencies:
-    "@metaplex-foundation/mpl-toolbox" "^0.8.0"
+    "@metaplex-foundation/mpl-toolbox" "^0.9.0"
+
+"@metaplex-foundation/mpl-token-metadata@^3.0.0-alpha.24":
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/@metaplex-foundation/mpl-token-metadata/-/mpl-token-metadata-3.1.2.tgz#44721abca353bcb3913589bccbd623f9ae79d76c"
+  integrity sha512-d5tVu9kCED6Z5pn7l+paGVej5V0xOhwvrRdPqgPls8SGHtI/6lF/C7qr6XdJXJza+5uyg/dd/ZCj3bjmEo+xhA==
+  dependencies:
+    "@metaplex-foundation/mpl-toolbox" "^0.9.0"
 
 "@metaplex-foundation/mpl-toolbox@^0.8.0":
   version "0.8.1"
   resolved "https://registry.npmjs.org/@metaplex-foundation/mpl-toolbox/-/mpl-toolbox-0.8.1.tgz"
   integrity sha512-PYU+qU6hg+h6V42z+MDnBTiWZXTTzWhIn5ieyRZYyszTru/LiJKHdsHGKe1VBfuXEuRdfRhAzivMjquZVaqO4A==
+
+"@metaplex-foundation/mpl-toolbox@^0.9.0":
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/@metaplex-foundation/mpl-toolbox/-/mpl-toolbox-0.9.1.tgz#a4dfcf61fbfc2a02dec49437aa3102c79f3281bd"
+  integrity sha512-Jm98H997MrDfKItjA8bxfsQa+ijVVR6YmMapSd0l75+nKo6Ca0eve/tv2z4qudMS2A4HbH6NLKSW3JHkutzvkQ==
 
 "@metaplex-foundation/umi-bundle-defaults@^0.8.4":
   version "0.8.10"
@@ -1367,9 +1379,9 @@
   dependencies:
     "@solana/wallet-adapter-react" "^0.15.35"
 
-"@solana/wallet-adapter-base@^0.9.17", "@solana/wallet-adapter-base@^0.9.22", "@solana/wallet-adapter-base@^0.9.23":
+"@solana/wallet-adapter-base@>=0.9.22", "@solana/wallet-adapter-base@^0.9.17", "@solana/wallet-adapter-base@^0.9.23":
   version "0.9.23"
-  resolved "https://registry.npmjs.org/@solana/wallet-adapter-base/-/wallet-adapter-base-0.9.23.tgz"
+  resolved "https://registry.yarnpkg.com/@solana/wallet-adapter-base/-/wallet-adapter-base-0.9.23.tgz#3b17c28afd44e173f44f658bf9700fd637e12a11"
   integrity sha512-apqMuYwFp1jFi55NxDfvXUX2x1T0Zh07MxhZ/nCCTGys5raSfYUh82zen2BLv8BSDj/JxZ2P/s7jrQZGrX8uAw==
   dependencies:
     "@solana/wallet-standard-features" "^1.1.0"
@@ -1518,18 +1530,18 @@
   dependencies:
     "@solana/wallet-adapter-base" "^0.9.23"
 
-"@solana/wallet-adapter-react-ui@^0.9.31":
+"@solana/wallet-adapter-react-ui@>=0.9.31":
   version "0.9.34"
-  resolved "https://registry.npmjs.org/@solana/wallet-adapter-react-ui/-/wallet-adapter-react-ui-0.9.34.tgz"
+  resolved "https://registry.yarnpkg.com/@solana/wallet-adapter-react-ui/-/wallet-adapter-react-ui-0.9.34.tgz#107a0e6264ad11f04cc08739eb89d72c820fcb6d"
   integrity sha512-jHysnZMtug66gRC37COXZCoOBYN2vjPNot9SgtHltaVfA/3WNohk6PUlWoYNCpY9ZPeRBZDk9AmH+HNkUX3GIQ==
   dependencies:
     "@solana/wallet-adapter-base" "^0.9.23"
     "@solana/wallet-adapter-base-ui" "^0.1.2"
     "@solana/wallet-adapter-react" "^0.15.35"
 
-"@solana/wallet-adapter-react@^0.15.32", "@solana/wallet-adapter-react@^0.15.35":
+"@solana/wallet-adapter-react@>=0.15.32", "@solana/wallet-adapter-react@^0.15.35":
   version "0.15.35"
-  resolved "https://registry.npmjs.org/@solana/wallet-adapter-react/-/wallet-adapter-react-0.15.35.tgz"
+  resolved "https://registry.yarnpkg.com/@solana/wallet-adapter-react/-/wallet-adapter-react-0.15.35.tgz#0d42e6774c0d55f3782d3eb5edb6ac9888858b08"
   integrity sha512-i4hc/gNLTYNLMEt2LS+4lrrc0QAwa5SU2PtYMnZ2A3rsoKF5m1bv1h6cjLj2KBry4/zRGEBoqkiMOC5zHkLnRQ==
   dependencies:
     "@solana-mobile/wallet-adapter-mobile" "^2.0.0"
@@ -1641,9 +1653,9 @@
     "@jnwng/walletconnect-solana" "^0.2.0"
     "@solana/wallet-adapter-base" "^0.9.23"
 
-"@solana/wallet-adapter-wallets@^0.19.16":
+"@solana/wallet-adapter-wallets@>=0.19.16":
   version "0.19.24"
-  resolved "https://registry.npmjs.org/@solana/wallet-adapter-wallets/-/wallet-adapter-wallets-0.19.24.tgz"
+  resolved "https://registry.yarnpkg.com/@solana/wallet-adapter-wallets/-/wallet-adapter-wallets-0.19.24.tgz#3cefabe74b46f9a10cc67c46165fb54864d75e44"
   integrity sha512-e2AV/JDNdmvbfotxjrRXnYKeeef3V9/jWh71tZBujlB/cFK/Lg/ZDHD9/XG76pr9DdpmXq33lZk+DpMLM3y9Bg==
   dependencies:
     "@solana/wallet-adapter-alpha" "^0.1.10"
