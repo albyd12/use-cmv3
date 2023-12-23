@@ -1,7 +1,7 @@
 import React from 'react'
 import { ReactNode, useEffect, useState } from 'react'
 import { Phase } from '../types/phase'
-import { CmContext, CmContextData } from './CmContext'
+import { Cmv3Context, Cmv3ContextData } from './Cmv3Context'
 import { createUmiWithSigners } from '../utils/umi'
 import { useWallet } from '@solana/wallet-adapter-react'
 import { validateCandyMachine } from '../utils/cm'
@@ -14,7 +14,7 @@ import { setComputeUnitLimit } from '@metaplex-foundation/mpl-toolbox'
 import { fetchNft } from '../utils/nft'
 import { JsonMetadata } from '@metaplex-foundation/mpl-token-metadata'
 
-interface CmProviderProps {
+interface Cmv3ProviderProps {
   config: {
     candyMachineId?: string
     candyMachineLUT?: string
@@ -32,9 +32,10 @@ interface CmProviderProps {
   children: ReactNode
 }
 
-export const CmProvider: React.FC<CmProviderProps> = ({ config, children, metadata }) => {
+export const Cmv3Provider: React.FC<Cmv3ProviderProps> = ({ config, children, metadata }) => {
   const wallet = useWallet()
 
+  //initialization
   const [umi, setUmi] = useState<Umi>(createUmiWithSigners(config.endpoint, wallet))
 
   const [candyMachine, setCandyMachine] = useState<CandyMachine | undefined>(undefined)
@@ -48,6 +49,20 @@ export const CmProvider: React.FC<CmProviderProps> = ({ config, children, metada
 
   const [minting, setMinting] = useState<string | false>(false)
   const [mints, setMints] = useState<{ mint: string; metadata: JsonMetadata | undefined }[]>([])
+
+  const [timeouts, setTimeouts] = useState<Record<number, NodeJS.Timeout>>({})
+
+  const updatePhase = (phaseLabel: string) => {
+    setPhases((prevPhases: Phase[]) =>
+      prevPhases.map((phase) => {
+        if (phase.label === phaseLabel) {
+          const refreshedPhase = refreshPhaseTime(phase)
+          return refreshedPhase
+        }
+        return phase
+      }),
+    )
+  }
 
   useEffect(() => {
     const initializeCandyMachineContext = async () => {
@@ -91,30 +106,16 @@ export const CmProvider: React.FC<CmProviderProps> = ({ config, children, metada
     setMinting(false)
     setPhasesLoading(true)
     initializeCandyMachineContext()
-  }, [umi, config.candyMachineLUT, config.endpoint, config.candyMachineId, metadata?.allowLists])
+  }, [umi])
 
   useEffect(() => {
     if (!wallet.connected && umi.identity.publicKey.toString() == '11111111111111111111111111111111') return
     setUmi(createUmiWithSigners(config.endpoint, wallet))
-  }, [wallet.connected, config.endpoint, umi.identity.publicKey, wallet])
-
-  const [timeouts, setTimeouts] = useState<Record<number, NodeJS.Timeout>>({})
-
-  const updatePhase = (phaseLabel: string) => {
-    setPhases((prevPhases) =>
-      prevPhases.map((phase) => {
-        if (phase.label === phaseLabel) {
-          const refreshedPhase = refreshPhaseTime(phase)
-          return refreshedPhase
-        }
-        return phase
-      }),
-    )
-  }
+  }, [wallet.connected])
 
   useEffect(() => {
     const newTimeouts: Record<number, NodeJS.Timeout> = {}
-    phases.forEach((phase) => {
+    phases.forEach((phase: Phase) => {
       if (phase.startsAt !== undefined) {
         if (phase.startsAt > Date.now()) {
           newTimeouts[phase.startsAt] = setTimeout(
@@ -130,14 +131,13 @@ export const CmProvider: React.FC<CmProviderProps> = ({ config, children, metada
       }
     })
 
-    setTimeouts((prevTimeouts) => ({ ...prevTimeouts, ...newTimeouts }))
-
+    setTimeouts((prevTimeouts: Record<number, NodeJS.Timeout>) => ({ ...prevTimeouts, ...newTimeouts }))
     setPhasesLoading(false)
 
     return () => {
-      Object.values(newTimeouts).forEach((timeoutId) => clearTimeout(timeoutId))
+      Object.values(newTimeouts).forEach((timeout: NodeJS.Timeout) => clearTimeout(timeout))
     }
-  }, [phases, timeouts])
+  }, [phases])
 
   useEffect(() => {
     setCandyMachineLoading(false)
@@ -150,28 +150,29 @@ export const CmProvider: React.FC<CmProviderProps> = ({ config, children, metada
     }
     setMinting(false)
     setMintCounter((mintCounter) => [mintCounter[0] - 1, mintCounter[1]])
-  }, [mints, candyMachine, umi])
+  }, [mints])
 
+  //possibly move this
   const initiateMint = async (label: string) => {
     if (!wallet.connected) {
-      throw Error('Wallet needs to be connected to mint')
+      throw new Error('Wallet needs to be connected to mint')
     }
 
     if (!candyGuard || !candyMachine) {
-      throw Error('Trying to mint without initialization')
+      throw new Error('Trying to mint without initialization')
     }
 
     if (!config.candyMachineLUT) {
-      throw Error('It is highly reccomended you create a LUT')
+      throw new Error('LUT needed for setup')
     }
 
     try {
       const group = candyGuard.groups.filter((group) => group.label === label)[0]
 
-      if (!group) throw Error('Phase not found')
+      if (!group) throw new Error('Phase not found')
 
       if (group.guards.allowList.__option == 'Some' && !metadata?.allowLists?.get(group.label)) {
-        throw Error('Allowlist for phase not found in metadata')
+        throw new Error('Allowlist for phase not found in metadata')
       }
 
       setMinting(group.label)
@@ -226,7 +227,7 @@ export const CmProvider: React.FC<CmProviderProps> = ({ config, children, metada
 
       if (!lastSignature) {
         setMinting(false)
-        throw Error('No transaction was created')
+        throw new Error('No transaction was created')
       }
 
       let transaction: TransactionWithMeta | null = null
@@ -241,12 +242,12 @@ export const CmProvider: React.FC<CmProviderProps> = ({ config, children, metada
 
       if (transaction === null) {
         setMinting(false)
-        throw Error(`No transaction on chain for ${lastSignature}`)
+        throw new Error(`No transaction on chain for ${lastSignature}`)
       }
 
       const fetchedNft = await fetchNft(umi, nftMint.publicKey)
       if (fetchedNft.digitalAsset && fetchedNft.jsonMetadata) {
-        setMints((mints) => [
+        setMints((mints: { mint: string; metadata: JsonMetadata | undefined }[]) => [
           ...mints,
           {
             mint: nftMint.publicKey.toString(),
@@ -260,7 +261,7 @@ export const CmProvider: React.FC<CmProviderProps> = ({ config, children, metada
     }
   }
 
-  const contextValue: CmContextData = {
+  const contextValue: Cmv3ContextData = {
     minting: minting,
     loading: {
       phases: phasesLoading,
@@ -276,5 +277,5 @@ export const CmProvider: React.FC<CmProviderProps> = ({ config, children, metada
     mint: initiateMint,
   }
 
-  return <CmContext.Provider value={contextValue}>{children}</CmContext.Provider>
+  return <Cmv3Context.Provider value={contextValue}>{children}</Cmv3Context.Provider>
 }

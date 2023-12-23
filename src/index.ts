@@ -1,5 +1,5 @@
-import { CmProvider } from './context/CmProvider'
-import { CmContext } from './context/CmContext'
+import { Cmv3Provider } from './context/Cmv3Provider'
+import { Cmv3Context } from './context/Cmv3Context'
 import Clock from './components/Clock'
 
-export { CmProvider as Cmv3Provider, CmContext as Cmv3Context, Clock }
+export { Cmv3Provider, Cmv3Context, Clock }

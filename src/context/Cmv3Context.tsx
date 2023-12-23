@@ -2,7 +2,7 @@ import { createContext, useContext } from 'react'
 import { Phase } from '../types/phase'
 import { CandyGuard, CandyMachine } from '@metaplex-foundation/mpl-candy-machine'
 
-export interface CmContextData {
+export interface Cmv3ContextData {
   loading: {
     candyMachine: boolean
     phases: boolean
@@ -18,12 +18,12 @@ export interface CmContextData {
   mint: (label: string) => Promise<void>
 }
 
-export const CmContext = createContext<CmContextData | undefined>(undefined)
+export const Cmv3Context = createContext<Cmv3ContextData | undefined>(undefined)
 
-export const useCm = (): CmContextData => {
-  const cm = useContext(CmContext)
-  if (!cm) {
-    throw Error('useCm must be used within a CmProvider')
+export const useCmv3 = (): Cmv3ContextData => {
+  const cmv3 = useContext(Cmv3Context)
+  if (!cmv3) {
+    throw new Error('useCmv3 must be used within a Cmv3Provider')
   }
-  return cm
+  return cmv3
 }
