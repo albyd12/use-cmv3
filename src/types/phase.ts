@@ -10,5 +10,5 @@ export type Phase = {
   payments: Payment[]
   startsAt?: number
   endsAt?: number
-  mintLismit?: number
+  mintLimit?: number
 }
