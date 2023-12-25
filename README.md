@@ -84,8 +84,8 @@ export  default  function  Mint() {
             <h1>Mint Page!</h1>
         
             <Counter
-                value={mintCounter.sold} 
-                maxValue={mintCounter.supply}
+                value={cmv3.mintCounter.sold} 
+                maxValue={cmv3.mintCounter.supply}
             />
             
             <Phases>
