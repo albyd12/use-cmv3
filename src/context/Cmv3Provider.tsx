@@ -1,13 +1,21 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { ReactNode, useEffect, useState } from 'react'
 import { Phase } from '../types/phase'
 import { Cmv3Context, Cmv3ContextData } from './Cmv3Context'
 import { createUmiWithSigners } from '../utils/umi'
-import { useWallet } from '@solana/wallet-adapter-react'
+import { WalletContext } from '@solana/wallet-adapter-react'
 import { validateCandyMachine } from '../utils/cm'
 import { AllowLists } from '../types/metadata'
 import { CandyGuard, CandyMachine, mintV2 } from '@metaplex-foundation/mpl-candy-machine'
-import { TransactionWithMeta, Umi, generateSigner, none, some, transactionBuilder } from '@metaplex-foundation/umi'
+import {
+  TransactionWithMeta,
+  Umi,
+  generateSigner,
+  none,
+  publicKey,
+  some,
+  transactionBuilder,
+} from '@metaplex-foundation/umi'
 import { getMintPhases, refreshPhaseTime } from '../utils/phases'
 import { combineTransactions, mintArgsBuilder, routeBuilder } from '../utils/mint'
 import { setComputeUnitLimit } from '@metaplex-foundation/mpl-toolbox'
@@ -33,7 +41,7 @@ interface Cmv3ProviderProps {
 }
 
 export const Cmv3Provider: React.FC<Cmv3ProviderProps> = ({ config, children, metadata }) => {
-  const wallet = useWallet()
+  const wallet = useContext(WalletContext)
 
   //initialization
   const [umi, setUmi] = useState<Umi>(createUmiWithSigners(config.endpoint, wallet))
@@ -66,6 +74,10 @@ export const Cmv3Provider: React.FC<Cmv3ProviderProps> = ({ config, children, me
 
   useEffect(() => {
     const initializeCandyMachineContext = async () => {
+      if (wallet.publicKey) {
+        console.log(publicKey.toString())
+      }
+
       if (!config.candyMachineId) {
         throw Error('Candy machine ID has not been configured')
       }
@@ -275,6 +287,7 @@ export const Cmv3Provider: React.FC<Cmv3ProviderProps> = ({ config, children, me
       supply: mintCounter[1],
     },
     mint: initiateMint,
+    mints: mints,
   }
 
   return <Cmv3Context.Provider value={contextValue}>{children}</Cmv3Context.Provider>

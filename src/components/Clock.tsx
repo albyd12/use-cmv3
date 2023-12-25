@@ -32,8 +32,8 @@ const Clock: React.FC<ClockProps> = ({ startDate }) => {
   return (
     <div>
       <div>
-        <span>{formatTimeUnit(timeLeft.days)}</span> days <span>{formatTimeUnit(timeLeft.hours)}</span> hours{' '}
-        <span>{formatTimeUnit(timeLeft.minutes)}</span> minutes <span>{formatTimeUnit(timeLeft.seconds)}</span> seconds
+        <span>{formatTimeUnit(timeLeft.days)}</span>:<span>{formatTimeUnit(timeLeft.hours)}</span>:
+        <span>{formatTimeUnit(timeLeft.minutes)}</span>:<span>{formatTimeUnit(timeLeft.seconds)}</span>:
       </div>
     </div>
   )
