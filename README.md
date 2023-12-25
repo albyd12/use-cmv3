@@ -109,8 +109,8 @@ export  default  function  Mint() {
 
 Phases are an interpolation of candy guard groups.
 
-| Name | Type | Description
-|--|--|--|--|
+| Name | Type | Description |
+|--|--|--|
 | label | `string` | Label of the guard candy guard group |
 | errors | `string[]` | Guards stopping the user from minting |
 | payments | `{ basisPoints:  number; decimals:  number; identifier:  string; }` | Payment guards formatted into Payment |
