@@ -97,13 +97,13 @@ export  default  function  Mint() {
 |Name | Type | Description | Default |
 |--|--|--|--|
 | loading | `{ candyMachine: boolean, phases: boolean}`  | Loading values for the whole candyMachine or just phases | `{ candyMachine: true, phases: true }` |
-| candyMachine? | `CandyMachine | undefined` | Returns the initialised candy machine if applicable | `undefined` |
-| candyGuard? | `CandyGuard | undefined` | Returns the initialised candy machines guard if applicable | `undefined` |
+| candyMachine? | `CandyMachine` | Returns the initialised candy machine if applicable | `undefined` |
+| candyGuard? | `CandyGuard` | Returns the initialised candy machines guard if applicable | `undefined` |
 | phases | `Phase[]`| Array of phases relative to the connected wallet | `[]` |
 | mintCounter | `{ supply: number; sold: number; }` | Exposes sold/supply statistics of candy machine | `{ supply: 0; sold: 0 }` |
-| minting | `string | false ` | Label of the phase user is currently minting | `false` |
+| minting | `string / false ` | Label of the phase user is currently minting | `false` |
 | mint | `(label: string) => Promise<void>` | Function to mint a phase with label |  |
-| mints | `{ mints: string; metadata: JsonMetadata | undefined }[]` | Array of NFTs minted by user | [] |
+| mints | `{ mints: string; metadata: JsonMetadata }[]` | Array of NFTs minted by user | [] |
 
 ### Phases:
 
@@ -114,8 +114,8 @@ Phases are an interpolation of candy guard groups.
 | label | `string` | Label of the guard candy guard group |
 | errors | `string[]` | Guards stopping the user from minting |
 | payments | `{ basisPoints:  number; decimals:  number; identifier:  string; }` | Payment guards formatted into Payment |
-| startsAt? | `number | undefined` | UNIX timestamp of the phases start date |
-| endsAt? | `number | undefined` | UNIX timestamp of the phases end date
+| startsAt? | `number` | UNIX timestamp of the phases start date |
+| endsAt? | `number` | UNIX timestamp of the phases end date
 
 ## Notes
 
