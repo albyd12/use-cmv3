@@ -25,7 +25,7 @@ import { JsonMetadata } from '@metaplex-foundation/mpl-token-metadata'
 interface Cmv3ProviderProps {
   config: {
     candyMachineId?: string
-    candyMachineLUT?: string
+    candyMachineLut?: string
     endpoint: string
   }
 
@@ -84,7 +84,7 @@ export const Cmv3Provider: React.FC<Cmv3ProviderProps> = ({ config, children, me
       if (!config.endpoint) {
         throw Error('No RPC configured')
       }
-      if (!config.candyMachineLUT) {
+      if (!config.candyMachineLut) {
         console.warn('No LUT has been configured, it is highly recomended you create one.')
       }
 
@@ -174,7 +174,7 @@ export const Cmv3Provider: React.FC<Cmv3ProviderProps> = ({ config, children, me
       throw new Error('Trying to mint without initialization')
     }
 
-    if (!config.candyMachineLUT) {
+    if (!config.candyMachineLut) {
       throw new Error('LUT needed for setup')
     }
 
@@ -211,7 +211,7 @@ export const Cmv3Provider: React.FC<Cmv3ProviderProps> = ({ config, children, me
         }),
       )
 
-      const groupedTx = await combineTransactions(umi, [routeBuild, tx], config.candyMachineLUT)
+      const groupedTx = await combineTransactions(umi, [routeBuild, tx], config.candyMachineLut)
 
       let lastSignature: Uint8Array | undefined
 
