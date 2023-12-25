@@ -36,9 +36,9 @@ npm install \
 
 Add the following to your `.env` file
 ```
-NEXT_PUBLIC_CANDY_MACHINE_ID={your_cm_id},
-NEXT_PUBLIC_CANDY_MACHINE_LUT={your_cm_lut},
-NEXT_PUBLIC_ENDPOINT={your_endpoint},
+NEXT_PUBLIC_CANDY_MACHINE_ID={your_cm_id}
+NEXT_PUBLIC_CANDY_MACHINE_LUT={your_cm_lut}
+NEXT_PUBLIC_ENDPOINT={your_endpoint}
 ```
 
 Wrap necessary components within `Cmv3Provider`, ensuring that [WalletAdapter](https://github.com/solana-labs/wallet-adapter) is an ancestor.
