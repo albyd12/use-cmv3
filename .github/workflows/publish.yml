@@ -34,11 +34,11 @@ jobs:
 
       - name: Build
 
-        run: npm run build
+        run: npm build
 
       - name: Publish
 
-        run: npm run publish
+        run: npm publish
 
         env:
 
