@@ -21,19 +21,6 @@
   "author": "Alby (0xalby)",
   "license": "MIT",
   "peerDependencies": {
-    "@metaplex-foundation/mpl-candy-machine": ">=6.0.0-alpha.16",
-    "@metaplex-foundation/mpl-token-metadata": ">=3.0.0-alpha.24",
-    "@metaplex-foundation/mpl-toolbox": ">=0.8.0",
-    "@metaplex-foundation/umi": ">=0.8.4",
-    "@metaplex-foundation/umi-bundle-defaults": ">=0.8.4",
-    "@metaplex-foundation/umi-rpc-web3js": ">=0.8.4",
-    "@metaplex-foundation/umi-signer-wallet-adapters": ">=0.8.4",
-    "@metaplex-foundation/umi-uploader-nft-storage": ">=0.8.4",
-    "@solana/wallet-adapter-base": ">=0.9.22",
-    "@solana/wallet-adapter-react": ">=0.15.32",
-    "@solana/wallet-adapter-react-ui": ">=0.9.31",
-    "@solana/wallet-adapter-wallets": ">=0.19.16",
-    "@solana/web3.js": ">=1.87.6",
     "react": ">=16"
   },
   "files": [
@@ -76,7 +63,7 @@
     "prettier": "^3.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "tslib": "^2.6.2",
     "typescript": "^5.3.3"
   }
-
 }
